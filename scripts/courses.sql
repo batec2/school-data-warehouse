@@ -9,12 +9,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[courses](
-	[department] [int] NOT NULL IDENTITY(1,1),
+	[course] [int] NOT NULL IDENTITY(1,1),
+	[department] [nvarchar](50) NOT NULL,
 	[faculty] [nvarchar](50) NOT NULL,
 	[university] [nvarchar](50) NOT NULL,
  CONSTRAINT [PK_courses] PRIMARY KEY CLUSTERED 
 (
-	[department] ASC
+	[course] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
