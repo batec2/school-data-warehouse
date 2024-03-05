@@ -1,8 +1,8 @@
 import express from "express";
-import { getDataFromRepository } from "../repositories/warehouse.repository.js";
+import { getData } from "../controllers/warehouse.controller.js";
 
 const router = express.Router();
 
-router.get("/", getDataFromRepository);
+router.get("/", getData);
 
 export default router;

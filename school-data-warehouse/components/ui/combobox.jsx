@@ -38,7 +38,7 @@ export function Combobox({ name, list }) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[200px] justify-between truncate ..."
         >
           {value ? list.find((item) => item.value === value)?.label : `${name}`}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

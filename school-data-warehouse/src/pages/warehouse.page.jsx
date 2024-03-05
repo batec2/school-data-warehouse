@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button.jsx";
 import "./warehouse.styles.css";
 import { Combobox } from "@/components/ui/combobox";
+import { useSearchParams } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetchWarehouse } from "../query/AxiosRequests";
 
 const WarehousePage = () => {
   const semesterList = [
@@ -58,8 +61,18 @@ const WarehousePage = () => {
     { value: "7", label: "Public Safety" },
   ];
 
-  const instructorList = [];
-  const studentList = [];
+  const instructorList = [
+    { value: "0", label: "Big Man" },
+    { value: "1", label: "Small Man" },
+    { value: "2", label: "Bigger Man" },
+    { value: "3", label: "Smaller Man" },
+  ];
+  const studentList = [
+    { value: "0", label: "Crusher Bate" },
+    { value: "1", label: "Bimpo Bompo" },
+    { value: "2", label: "Jaz Man" },
+    { value: "3", label: "Bumbo Bimpo" },
+  ];
   const departmentList = [
     { value: "0", label: "Computer Science" },
     { value: "1", label: "Mathematics abd Staistics" },
@@ -70,23 +83,44 @@ const WarehousePage = () => {
     { value: "6", label: "Child Care And Youth Care" },
     { value: "7", label: "Public Safety And Justice Studies" },
   ];
+  const [searchParams, _] = useSearchParams();
+  const queryClient = useQueryClient();
+  const {
+    data: results,
+    refetch: refetchWarehouse,
+    isPending,
+    isError,
+  } = useQuery({
+    queryKey: [searchParams.toString(), searchParams],
+    queryFn: fetchWarehouse,
+    onSuccess: () => {
+      alert("DONE!");
+    },
+    enabled: false,
+  });
+
+  const queryDb = () => {
+    // queryClient.invalidateQueries();
+    refetchWarehouse();
+    // fetchWarehouse([0, searchParams]);
+  };
 
   return (
-    <div>
-      <h1>Page1</h1>
-      <Button>Button</Button>
+    <div className="FilterContainer">
+      <h1>wusup</h1>
       <Combobox name="Instructor" list={instructorList}></Combobox>
       <Combobox name="Rank" list={rankList}></Combobox>
-      <Combobox name="Instructor-Faculty" list={facultyList}></Combobox>
-      <Combobox name="Instructor University" list={universityList}></Combobox>
+      <Combobox name="Instructor-Fac" list={facultyList}></Combobox>
+      <Combobox name="Instructor-Uni" list={universityList}></Combobox>
       <Combobox name="Student" list={studentList}></Combobox>
       <Combobox name="Major" list={majorList}></Combobox>
       <Combobox name="Gender" list={genderList}></Combobox>
       <Combobox name="Department" list={departmentList}></Combobox>
-      <Combobox name="Course-Faculty" list={facultyList}></Combobox>
-      <Combobox name="Course-University" list={universityList}></Combobox>
+      <Combobox name="Course-Fac" list={facultyList}></Combobox>
+      <Combobox name="Course-Uni" list={universityList}></Combobox>
       <Combobox name="Semester" list={semesterList}></Combobox>
       <Combobox name="Year" list={yearList}></Combobox>
+      <Button onClick={queryDb}>Get Results</Button>
     </div>
   );
 };
