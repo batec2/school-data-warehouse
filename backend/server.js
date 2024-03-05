@@ -1,13 +1,13 @@
 import express from "express";
 import morgan from "morgan";
 import sql from "mssql";
-import route from "./routes/warehouse.route";
+import routes from "./routes/warehouse.route.js";
 import dotenv from "dotenv";
 import cors from "cors";
 dotenv.config();
 
 const app = express();
-const PORT = 8080;
+const PORT = 8888;
 const config = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -28,7 +28,7 @@ app.use(
 app.use(morgan("dev")); //console loging
 app.use(express.json()); //body parsing
 app.use(express.urlencoded({ extended: true })); //query string
-app.use("/", route);
+app.use("/", routes);
 
 sql.connect(config).then(async (pool) => {
   app.locals.db = pool;
