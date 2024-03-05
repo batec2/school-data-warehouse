@@ -14,9 +14,9 @@ WHILE @startYear <= @endYear
 BEGIN
     INSERT INTO [dbo].[date] (semester, year)
     VALUES 
-        ('Fall', CAST(@startYear AS NVARCHAR(4))),
-        ('Winter', CAST(@startYear AS NVARCHAR(4))),
-        ('Spring/Summer', CAST(@startYear AS NVARCHAR(4)));
+        ('fall', CAST(@startYear AS NVARCHAR(4))),
+        ('winter', CAST(@startYear AS NVARCHAR(4))),
+        ('spring/summer', CAST(@startYear AS NVARCHAR(4)));
 
     SET @startYear = @startYear + 1;
 END;
