@@ -18,12 +18,12 @@ BEGIN
 
     INSERT INTO @FacultyOptions (Faculty)
     VALUES
-    ('Arts & Science'),
-    ('Fine Arts & Culture'),
-    ('Health Studies'),
-    ('Nursing'),
-    ('Business'),
-    ('Continuing Education')
+    ('arts & science'),
+    ('fine arts & culture'),
+    ('health studies'),
+    ('nursing'),
+    ('business'),
+    ('continuing education')
 
     DECLARE @RankOptions TABLE (
         Rank NVARCHAR(50)
@@ -31,10 +31,10 @@ BEGIN
 
     INSERT INTO @RankOptions (Rank)
     VALUES
-    ('Assistant'),
-    ('Associate'),
-    ('Senior'),
-    ('Other')
+    ('assistant'),
+    ('associate'),
+    ('senior'),
+    ('other')
 
     DECLARE @UniversityOptions TABLE (
         University NVARCHAR(50)
@@ -42,12 +42,12 @@ BEGIN
 
     INSERT INTO @UniversityOptions (University)
     VALUES
-    ('MacEwan'),
-    ('UoA'),
-    ('UoC'),
-    ('NAIT'),
-    ('SAIT'),
-    ('Concordia')
+    ('macewan'),
+    ('uoa'),
+    ('uoc'),
+    ('nait'),
+    ('sait'),
+    ('concordia')
 
     DECLARE @counter INT = 1
     DECLARE @RowCount INT

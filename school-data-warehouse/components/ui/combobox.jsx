@@ -40,7 +40,11 @@ export function Combobox({ name, list }) {
           aria-expanded={open}
           className="w-[200px] justify-between truncate ..."
         >
-          {value ? list.find((item) => item.value === value)?.label : `${name}`}
+          {value
+            ? list.find(
+                (item) => item.value.toLowerCase() === value.toLowerCase()
+              )?.label
+            : `${name}`}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -54,7 +58,7 @@ export function Combobox({ name, list }) {
                 key={item.value}
                 value={item.value}
                 onSelect={(currentValue) => {
-                  if (currentValue === value) {
+                  if (currentValue.toLowerCase() === value.toLowerCase()) {
                     setValue("");
                     setSearchParams((searchParams) => {
                       if (searchParams.has(name)) {
@@ -63,7 +67,6 @@ export function Combobox({ name, list }) {
                       return searchParams;
                     });
                   } else {
-                    console.log(currentValue);
                     setValue(currentValue);
                     setSearchParams((searchParams) => {
                       searchParams.set(name, currentValue);
@@ -76,7 +79,9 @@ export function Combobox({ name, list }) {
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === item.value ? "opacity-100" : "opacity-0"
+                    value.toLowerCase() === item.value.toLowerCase()
+                      ? "opacity-100"
+                      : "opacity-0"
                   )}
                 />
                 {item.label}

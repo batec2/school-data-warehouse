@@ -7,9 +7,9 @@ import { fetchWarehouse } from "../query/AxiosRequests";
 
 const WarehousePage = () => {
   const semesterList = [
-    { value: "0", label: "Fall" },
-    { value: "1", label: "Winter" },
-    { value: "2", label: "Spring/Summer" },
+    { value: "fall", label: "Fall" },
+    { value: "winter", label: "Winter" },
+    { value: "spring/summer", label: "Spring/Summer" },
   ];
 
   const yearList = Array.from(Array(2025 - 1993)).map((e, i) => {
@@ -20,45 +20,63 @@ const WarehousePage = () => {
   });
 
   const rankList = [
-    { value: "0", label: "Associate" },
-    { value: "1", label: "Assistant" },
-    { value: "2", label: "Sessional" },
+    { value: "assistant", label: "Assistant" },
+    { value: "associate", label: "Associate" },
+    { value: "senior", label: "Senior" },
+    { value: "other", label: "Other" },
   ];
 
   const universityList = [
-    { value: "0", label: "University of Alberta" },
-    { value: "1", label: "Macewan University" },
-    { value: "2", label: "University Of Calgary" },
+    { value: "macewan", label: "MacEwan" },
+    { value: "uof", label: "UoA" },
+    { value: "uoc", label: "UoC" },
+    { value: "nait", label: "NAIT" },
+    { value: "sait", label: "SAIT" },
+    { value: "concordia", label: "Concordia" },
   ];
 
   const facultyList = [
-    {
-      value: "0",
-      label: "Faculty of Arts and Science",
-    },
-    { value: "1", label: "Faculty of Nursing" },
-    {
-      value: "2",
-      label: "Faculty of Fine Arts and Communications",
-    },
-    { value: "3", label: "Faculty of Health and Community Studies" },
+    { value: "arts & science", label: "Arts & Science" },
+    { value: "fine arts & culture", label: "Fine Arts & Culture" },
+    { value: "health studies", label: "Health Studies" },
+    { value: "nursing", label: "Nursing" },
+    { value: "business", label: "Business" },
+    { value: "continuing education", label: "Continuing Education" },
   ];
 
   const genderList = [
-    { value: "0", label: "Male" },
-    { value: "1", label: "female" },
-    { value: "2", label: "Other" },
+    { value: "male", label: "Male" },
+    { value: "female", label: "female" },
+    { value: "other", label: "Other" },
   ];
 
   const majorList = [
-    { value: "0", label: "Computer Science" },
-    { value: "1", label: "Mathematics" },
-    { value: "2", label: "Nursing" },
-    { value: "3", label: "Health Systems" },
-    { value: "4", label: "Music" },
-    { value: "5", label: "Design" },
-    { value: "6", label: "Child Care" },
-    { value: "7", label: "Public Safety" },
+    { value: "finance", label: "Finance" },
+    { value: "accounting", label: "Accounting" },
+    { value: "anthropology", label: "Anthropology" },
+    { value: "economics", label: "Economics" },
+    { value: "political sciences", label: "Political Sciences" },
+    { value: "art", label: "Art" },
+    { value: "child & youth care", label: "Child & Youth care" },
+    { value: "biology", label: "Biology" },
+    { value: "physics", label: "Physics" },
+    { value: "chemistry", label: "Chemistry" },
+    { value: "mathematics", label: "Mathematics" },
+    { value: "computer Science", label: "Computer Science" },
+    { value: "humanities", label: "Humanities" },
+    { value: "design", label: "Design" },
+    { value: "communications", label: "Communications" },
+    { value: "health systems", label: "Health systems" },
+    { value: "human health", label: "Human Health" },
+    { value: "early learning", label: "Early learning" },
+    { value: "international business", label: "International Business" },
+    { value: "music", label: "Music" },
+    { value: "management", label: "Management" },
+    { value: "nursing", label: "Nursing" },
+    { value: "social work", label: "Social Work" },
+    { value: "psychology", label: "Psychology" },
+    { value: "physical sciences", label: "Physical Sciences" },
+    { value: "professional nursing", label: "Professional Nursing" },
   ];
 
   const instructorList = [

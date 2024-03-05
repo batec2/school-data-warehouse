@@ -18,32 +18,32 @@ BEGIN
 
     INSERT INTO @MajorOptions (major)
     VALUES
-    ('Accounting'),
-    ('Finance'),
-    ('Anthropology'),
-    ('Economics'),
-    ('Political Sciences'),
-    ('Art'),
-    ('Child & Youth care'),
-    ('Biology'),
-    ('Physics'),
-    ('Chemistry'),
-    ('Mathematics'),
-    ('Computer Science'),
-    ('Humanities'),
-    ('Design'),
-    ('Communications'),
-    ('Human Health'),
-    ('Health systems'),
-    ('Early learning'),
-    ('International Business'),
-    ('Music'),
-    ('Management'),
-    ('Nursing'),
-    ('Social Work'),
-    ('Psychology'),
-    ('Physical Sciences'),
-    ('Professional Nursing')
+    ('accounting'),
+    ('finance'),
+    ('anthropology'),
+    ('economics'),
+    ('political sciences'),
+    ('art'),
+    ('child & youth care'),
+    ('biology'),
+    ('physics'),
+    ('chemistry'),
+    ('mathematics'),
+    ('computer science'),
+    ('humanities'),
+    ('design'),
+    ('communications'),
+    ('human health'),
+    ('health systems'),
+    ('early learning'),
+    ('international business'),
+    ('music'),
+    ('management'),
+    ('nursing'),
+    ('social work'),
+    ('psychology'),
+    ('physical sciences'),
+    ('professional nursing')
 
     DECLARE @GenderOptions TABLE (
         gender NVARCHAR(10)
@@ -51,9 +51,9 @@ BEGIN
 
     INSERT INTO @GenderOptions (gender)
     VALUES
-    ('Male'),
-    ('Female'),
-    ('Other')
+    ('male'),
+    ('female'),
+    ('other')
 
     DECLARE @counter INT = 1
 
