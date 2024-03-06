@@ -12,4 +12,4 @@ EXEC GenerateRandomStudents;
 -- this will generate the data form instructers table
 EXEC GenerateRandomInstructors;
 -- this will generate the data form courses table
---EXEC GenerateRandomCourses;
+EXEC GenerateRandomCourses;
