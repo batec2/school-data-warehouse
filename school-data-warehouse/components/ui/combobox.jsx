@@ -55,7 +55,8 @@ export function Combobox({ name, list }) {
           <CommandInput placeholder={`${name}`} />
           <CommandEmpty>No {name} found.</CommandEmpty>
           <CommandGroup>
-            {list.map((item) => (
+            {/* Limit size of array to first 100 */}
+            {list.slice(0, 100).map((item) => (
               <CommandItem
                 key={item.value}
                 value={item.value}

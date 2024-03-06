@@ -5,7 +5,9 @@ import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchWarehouse } from "../query/AxiosRequests";
 import { useState } from "react";
+import { terminal } from "virtual:terminal";
 import {
+  courseList,
   departmentList,
   facultyList,
   genderList,
@@ -17,14 +19,25 @@ import {
   universityList,
   yearList,
 } from "./dropDownList";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCell,
+} from "@/components/ui/table";
 
 const WarehousePage = () => {
-  const [currentQuery, setQuery] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
+  const [savedResultsState, setSavedResults] = useState({});
   const {
     data: results,
     refetch: refetchWarehouse,
     isPending,
+    isLoading,
+    isSuccess,
     isError,
   } = useQuery({
     queryKey: [searchParams.toString(), searchParams],
@@ -34,21 +47,61 @@ const WarehousePage = () => {
 
   const queryDb = () => {
     refetchWarehouse();
-    setQuery(searchParams);
   };
   const handleReset = () => {
+    localStorage.clear();
+    setSavedResults({});
     setSearchParams({});
-    setQuery({});
   };
   const handleData = () => {
     if (isError) {
-      return <h1>ERROR</h1>;
+      return <h1 className="error">ERROR</h1>;
     }
-    if (isPending) {
-      return <h1>PENDING</h1>;
+    if (isLoading) {
+      return <h1 className="pending">PENDING</h1>;
     }
-    return <h1>{results[0].count}</h1>;
+    if (isSuccess) {
+      return <h1 className="result">{`Result: ${results[0].count}`}</h1>;
+    }
   };
+  const handleSave = () => {
+    let savedResults = JSON.parse(localStorage.getItem("savedResults"));
+    // Create local host file if saved does not exist
+    const searchParamString = searchParams.toString();
+    console.log(searchParams.toString());
+    if (!savedResults) {
+      savedResults = {};
+      savedResults[searchParamString] = results[0].count;
+    } else if (
+      Object.keys(savedResults).length < 5 &&
+      !(searchParamString in savedResults)
+    ) {
+      savedResults[searchParamString] = results[0].count;
+    } else {
+      return;
+    }
+    localStorage.setItem("savedResults", JSON.stringify(savedResults));
+    setSavedResults(savedResults);
+  };
+  const handleSaveButton = () => {
+    if (isSuccess) {
+      return <Button onClick={handleSave}>Save</Button>;
+    } else return;
+  };
+
+  const handleTableItems = () => {
+    const tableList = [];
+    for (const key in savedResultsState) {
+      tableList.push(
+        <TableRow key={key}>
+          <TableCell>{key}</TableCell>
+          <TableCell>{savedResultsState[key]}</TableCell>
+        </TableRow>
+      );
+    }
+    return tableList;
+  };
+
   return (
     <div className="FilterContainer">
       <h1>School Data Warehouse</h1>
@@ -59,6 +112,7 @@ const WarehousePage = () => {
       <Combobox name="Student" list={studentList}></Combobox>
       <Combobox name="Major" list={majorList}></Combobox>
       <Combobox name="Gender" list={genderList}></Combobox>
+      <Combobox name="Course" list={courseList}></Combobox>
       <Combobox name="Department" list={departmentList}></Combobox>
       <Combobox name="Course-Fac" list={facultyList}></Combobox>
       <Combobox name="Course-Uni" list={universityList}></Combobox>
@@ -66,8 +120,16 @@ const WarehousePage = () => {
       <Combobox name="Year" list={yearList}></Combobox>
       <Button onClick={queryDb}>Get Results</Button>
       <Button onClick={handleReset}>Reset</Button>
+      {handleSaveButton()}
       {handleData()}
-      <p>{currentQuery.toString()}</p>
+      <Table>
+        <TableCaption>Saved Results</TableCaption>
+        <TableHeader>
+          <TableHead>Query Parameters</TableHead>
+          <TableHead>Result</TableHead>
+        </TableHeader>
+        <TableBody>{handleTableItems()}</TableBody>
+      </Table>
     </div>
   );
 };

@@ -77,12 +77,21 @@ export const instructorList = [
   { value: "2", label: "Bigger Man" },
   { value: "3", label: "Smaller Man" },
 ];
-export const studentList = [
-  { value: "0", label: "Crusher Bate" },
-  { value: "1", label: "Bimpo Bompo" },
-  { value: "2", label: "Jaz Man" },
-  { value: "3", label: "Bumbo Bimpo" },
-];
+
+export const courseList = Array.from(Array(20000)).map((e, i) => {
+  return {
+    value: "" + (i + 1),
+    label: "" + (i + 1),
+  };
+});
+
+export const studentList = Array.from(Array(100000)).map((e, i) => {
+  return {
+    value: "" + (i + 1),
+    label: "" + (i + 1),
+  };
+});
+
 export const departmentList = [
   { value: "0", label: "Computer Science" },
   { value: "1", label: "Mathematics abd Staistics" },

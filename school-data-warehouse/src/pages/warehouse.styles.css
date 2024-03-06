@@ -2,3 +2,15 @@
   /* display: flex; */
   /* flex-direction: column; */
 }
+
+.error {
+  font-size: 100px;
+}
+
+.pending {
+  font-size: 100px;
+}
+
+.result {
+  font-size: 100px;
+}
