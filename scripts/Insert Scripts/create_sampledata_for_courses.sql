@@ -17,30 +17,29 @@ BEGIN
 
     INSERT INTO @FacultiesAndDepartments (Faculty, Department)
     VALUES
-    ('Arts & Science', 'Biology'),
-    ('Arts & Science', 'Physics'),
-    ('Arts & Science', 'Chemistry'),
-    ('Arts & Science', 'Mathematics'),
-    ('Arts & Science', 'Psychology'),
-    ('Arts & Science', 'Computer Science'),
-    ('Arts & Science', 'Anthropology'),
-    ('Arts & Science', 'Economics'),
-    ('Arts & Science', 'Political Sciences'),
-    ('Fine Arts & Culture', 'Art'),
-    ('Fine Arts & Culture', 'Communications'),
-    ('Fine Arts & Culture', 'English'),
-    ('Health Studies', 'Human Health'),
-    ('Health Studies', 'Health Systems'),
-    ('Physical Sciences', 'Physical Sciences'),
-    ('Child & Youth Care', 'Child & Youth Care'),
-    ('Nursing', 'Nursing'),
-    ('Nursing', 'Professional Nursing'),
-    ('Business', 'Accounting'),
-    ('Business', 'Finance'),
-    ('Business', 'International Business'),
-    ('Business', 'Management'),
-    ('Continuing Education', 'Continuing Education'),
-    ('Early Learning', 'Early Learning')
+    ('arts & science', 'biology'),
+    ('arts & science', 'physics'),
+    ('arts & science', 'chemistry'),
+    ('arts & science', 'mathematics'),
+    ('arts & science', 'psychology'),
+    ('arts & science', 'computer science'),
+    ('arts & science', 'anthropology'),
+    ('arts & science', 'economics'),
+    ('arts & science', 'political sciences'),
+    ('fine arts & culture', 'art'),
+    ('fine arts & Culture', 'communications'),
+    ('fine arts & culture', 'english'),
+    ('health studies', 'Human Health'),
+    ('health studies', 'health systems'),
+    ('health studies', 'physical sciences'),
+    ('health studies', 'child & youth care'),
+    ('nursing', 'nursing'),
+    ('nursing', 'professional nursing'),
+    ('business', 'accounting'),
+    ('business', 'finance'),
+    ('business', 'international business'),
+    ('business', 'management'),
+    ('continuing educationg', 'early learning')
 
     DECLARE @Universities TABLE (
         University VARCHAR(50)
@@ -48,12 +47,12 @@ BEGIN
 
     INSERT INTO @Universities (University)
     VALUES
-    ('MacEwan'),
-    ('UoA'),
-    ('UoC'),
-    ('NAIT'),
-    ('SAIT'),
-    ('Concordia')
+    ('macewan'),
+    ('uoa'),
+    ('uoc'),
+    ('nait'),
+    ('sait'),
+    ('concordia')
 
     DECLARE @RandomIndexFaculty INT
     DECLARE @RandomIndexUniversity INT
