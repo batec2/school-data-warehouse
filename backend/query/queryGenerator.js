@@ -5,10 +5,10 @@
  */
 const queryGenerator = (query) => {
   if (!query || Object.keys(query).length === 0) {
-    return "SELECT COUNT(*) from warehouse";
+    return "SELECT COUNT(*) as count from warehouse";
   }
 
-  let selectString = "SELECT COUNT(*) FROM warehouse";
+  let selectString = "SELECT COUNT(*) as count FROM warehouse";
   let whereString = " WHERE";
 
   //Add Join for instructors
@@ -19,12 +19,12 @@ const queryGenerator = (query) => {
     "Instructor-Uni" in query
   ) {
     selectString += ",instructors";
-    whereString += " instructors.instructor = warhouse.instructor";
+    whereString += " instructors.instructor = warehouse.instructor";
   }
   // Adds Join for Students
   if ("Student" in query || "Major" in query || "Gender" in query) {
     selectString += ",students";
-    if (whereString.length > 5) {
+    if (whereString.length > 6) {
       whereString += " AND";
     }
     whereString += " students.student = warehouse.student";
@@ -32,15 +32,16 @@ const queryGenerator = (query) => {
   // Adds Join for Courses
   if ("Department" in query || "Course-Fac" in query || "Course-Uni" in query) {
     selectString += ",courses";
-    if (whereString.length > 5) {
+    if (whereString.length > 6) {
       whereString += " AND";
     }
-    whereString += " students.student = warehouse.student";
+    whereString += " courses.course = warehouse.course";
   }
   // Adds Join for Date
-  if ("Semster" in query || "Year" in query) {
+  if ("Semester" in query || "Year" in query) {
     selectString += ",date";
-    if (whereString.length > 5) {
+    if (whereString.length > 6) {
+      console.log(whereString.length);
       whereString += " AND";
     }
     whereString +=
@@ -51,37 +52,40 @@ const queryGenerator = (query) => {
     whereString += ` AND warehouse.instructor = ${query.Instructor}`;
   }
   if ("Rank" in query) {
-    whereString += ` AND instructors.rank = ${query.Rank}`;
+    whereString += ` AND instructors.rank = '${query.Rank}'`;
   }
   if ("Instructor-Fac" in query) {
-    whereString += ` AND instructors.faculty = ${query["Instructor-Fac"]}`;
+    whereString += ` AND instructors.faculty = '${query["Instructor-Fac"]}'`;
   }
   if ("Instructor-Uni" in query) {
-    whereString += ` AND instructors.university = ${query["Instructor-Uni"]}`;
+    whereString += ` AND instructors.university = '${query["Instructor-Uni"]}'`;
   }
   if ("Student" in query) {
     whereString += ` AND warehouse.student = ${query.Student}`;
   }
   if ("Major" in query) {
-    whereString += ` AND students.major = ${query.Major}`;
+    whereString += ` AND students.major = '${query.Major}'`;
   }
   if ("Gender" in query) {
-    whereString += ` AND students.gender = ${query.Gender}`;
+    whereString += ` AND students.gender = '${query.Gender}'`;
+  }
+  if ("Course" in query) {
+    whereString += ` AND courses.course = ${query.Course}`;
   }
   if ("Department" in query) {
-    whereString += ` AND courses.department = ${query.Department}`;
+    whereString += ` AND courses.department = '${query.Department}'`;
   }
   if ("Course-Fac" in query) {
-    whereString += ` AND courses.faculty = ${query["Course-Fac"]}`;
+    whereString += ` AND courses.faculty = '${query["Course-Fac"]}'`;
   }
   if ("Course-Uni" in query) {
-    whereString += ` AND courses.university = ${query["Course-Uni"]}`;
+    whereString += ` AND courses.university = '${query["Course-Uni"]}'`;
   }
   if ("Semester" in query) {
-    whereString += ` AND date.semester = ${query.Semester}`;
+    whereString += ` AND date.semester = '${query.Semester}'`;
   }
   if ("Year" in query) {
-    whereString += ` AND date.year = ${query.Year}`;
+    whereString += ` AND date.year = '${query.Year}'`;
   }
   return selectString + whereString;
 };

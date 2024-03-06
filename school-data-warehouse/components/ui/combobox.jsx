@@ -28,8 +28,10 @@ export function Combobox({ name, list }) {
     const param = searchParams.get(name);
     if (param) {
       setValue(param);
+    } else {
+      setValue("");
     }
-  }, []);
+  }, [searchParams]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

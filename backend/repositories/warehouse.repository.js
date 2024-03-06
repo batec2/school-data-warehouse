@@ -3,15 +3,15 @@
  * @param {*} req
  * @returns
  */
-export const getDataFromRepository = async (req) => {
+export const getDataFromRepository = async (req, generatedQuery) => {
   try {
-    console.log(req.query);
-    // const query = req.app.locals.db.request();
-    //adds the parameters for the stored procedure
-    // query.input(queryString);
-    // const results = await query.execute("spGetFilteredSections");
-    // return results.recordset;
+    const query = req.app.locals.db.request();
+    // adds the parameters for the stored procedure
+    query.input("query", generatedQuery);
+    const results = await query.execute("spExecuteQuery");
+    return results.recordset;
   } catch (err) {
-    throw Error("Failed to get classes from database");
+    console.log(err);
+    throw Error("Failed to get result from database");
   }
 };
