@@ -28,6 +28,7 @@ import {
   TableRow,
   TableCell,
 } from "@/components/ui/table";
+import { InputFile } from "@/components/ui/fileselect";
 
 const WarehousePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -104,7 +105,10 @@ const WarehousePage = () => {
 
   return (
     <div className="FilterContainer">
-      <h1>School Data Warehouse</h1>
+      <div>
+        <h1>School Data Warehouse</h1>
+        <InputFile></InputFile>
+      </div>
       <Combobox name="Instructor" list={instructorList}></Combobox>
       <Combobox name="Rank" list={rankList}></Combobox>
       <Combobox name="Instructor-Fac" list={facultyList}></Combobox>

@@ -27,15 +27,6 @@ export const universityList = [
   { value: "concordia", label: "Concordia" },
 ];
 
-export const facultyList = [
-  { value: "arts & science", label: "Arts & Science" },
-  { value: "fine arts & culture", label: "Fine Arts & Culture" },
-  { value: "health studies", label: "Health Studies" },
-  { value: "nursing", label: "Nursing" },
-  { value: "business", label: "Business" },
-  { value: "continuing education", label: "Continuing Education" },
-];
-
 export const genderList = [
   { value: "male", label: "Male" },
   { value: "female", label: "female" },
@@ -92,13 +83,29 @@ export const studentList = Array.from(Array(100000)).map((e, i) => {
   };
 });
 
+export const facultyList = [
+  { value: "arts & science", label: "Arts & Science" },
+  { value: "fine arts & culture", label: "Fine Arts & Culture" },
+  { value: "health studies", label: "Health Studies" },
+  { value: "nursing", label: "Nursing" },
+  { value: "business", label: "Business" },
+  { value: "continuing education", label: "Continuing Education" },
+];
+
 export const departmentList = [
-  { value: "0", label: "Computer Science" },
-  { value: "1", label: "Mathematics abd Staistics" },
-  { value: "2", label: "Nursing Practice" },
-  { value: "3", label: "Health Systems and Sustainablility" },
-  { value: "4", label: "Music" },
-  { value: "5", label: "Design" },
-  { value: "6", label: "Child Care And Youth Care" },
-  { value: "7", label: "Public Safety And Justice Studies" },
+  { value: "computer science", label: "Computer Science" },
+  { value: "physics", label: "Physics" },
+  { value: "chemistry", label: "Chemistry" },
+  { value: "mathematics", label: "Mathematics" },
+  { value: "psychology", label: "Psychology" },
+  { value: "anthropology", label: "Anthropology" },
+  { value: "economics", label: "Economics" },
+  { value: "political sciences", label: "political sciences" },
+  { value: "art", label: "art" },
+  { value: "communications", label: "communications" },
+  { value: "english", label: "english" },
+  { value: "human health", label: "human health" },
+  { value: "health systems", label: "health systems" },
+  { value: "physical sciences", label: "physical sciences" },
+  { value: "child & youth care", label: "child & youth care" },
 ];

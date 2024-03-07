@@ -12,10 +12,7 @@ EXEC GenerateRandomStudents;
 -- this will generate the data form instructers table
 EXEC GenerateRandomInstructors;
 -- this will generate the data form courses table
-<<<<<<< HEAD
 EXEC InsertRandomCourses;
-=======
-EXEC GenerateRandomCourses;
 -- generating warehouse
-EXEC Popuulatewarehouse;
->>>>>>> 6a82f33 (generting warehouse)
+EXEC PopulateWarehouse;
+
