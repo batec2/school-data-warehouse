@@ -1,9 +1,14 @@
 import { XMLParser, XMLBuilder } from "fast-xml-parser";
 
 const parseXML = (xml) => {
-  const parser = new XMLParser();
+  const options = {
+    ignoreAttributes: false,
+    attributeNamePrefix: "",
+    attributesGroupName: "",
+  };
+  const parser = new XMLParser(options);
   let jObject = parser.parse(xml);
-  console.log(JSON.stringify(jObject));
+  return jObject;
 };
 
 export default parseXML;

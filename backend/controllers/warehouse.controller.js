@@ -1,5 +1,8 @@
 import queryGenerator from "../query/queryGenerator.js";
-import { getDataFromRepository } from "../repositories/warehouse.repository.js";
+import {
+  getDataFromRepository,
+  insertDataRepository,
+} from "../repositories/warehouse.repository.js";
 import fs from "fs";
 import parseXML from "../utils/parseXML.js";
 
@@ -37,7 +40,8 @@ export const insertFile = async (req, res) => {
         return;
       }
       try {
-        parseXML(data);
+        const result = parseXML(data);
+        insertDataRepository(req, result);
       } catch (e) {
         console.log(e);
       }
