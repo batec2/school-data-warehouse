@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button.jsx";
 import "./warehouse.styles.css";
 import { Combobox } from "@/components/ui/combobox";
 import { useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { fetchWarehouse } from "../query/AxiosRequests";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { fetchWarehouse, uploadFile } from "../query/AxiosRequests";
 import { useState } from "react";
 import { terminal } from "virtual:terminal";
 import {
@@ -33,6 +33,7 @@ import { InputFile } from "@/components/ui/fileselect";
 const WarehousePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [savedResultsState, setSavedResults] = useState({});
+  const [currentFile, setCurrentFile] = useState();
   const {
     data: results,
     refetch: refetchWarehouse,
@@ -44,6 +45,10 @@ const WarehousePage = () => {
     queryKey: [searchParams.toString(), searchParams],
     queryFn: fetchWarehouse,
     enabled: false,
+  });
+
+  const { isError: isUploadError, mutateAsync: uploadFileAsync } = useMutation({
+    mutationFn: uploadFile,
   });
 
   const queryDb = () => {
@@ -103,11 +108,19 @@ const WarehousePage = () => {
     return tableList;
   };
 
+  const handleFileSelect = (e) => {
+    console.log(e.target.files[0]);
+    setCurrentFile(e.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    uploadFileAsync({ file: currentFile });
+  };
+
   return (
     <div className="FilterContainer">
       <div>
         <h1>School Data Warehouse</h1>
-        <InputFile></InputFile>
       </div>
       <Combobox name="Instructor" list={instructorList}></Combobox>
       <Combobox name="Rank" list={rankList}></Combobox>
@@ -129,11 +142,17 @@ const WarehousePage = () => {
       <Table>
         <TableCaption>Saved Results</TableCaption>
         <TableHeader>
-          <TableHead>Query Parameters</TableHead>
-          <TableHead>Result</TableHead>
+          <TableRow>
+            <TableHead>Query Parameters</TableHead>
+            <TableHead>Result</TableHead>
+          </TableRow>
         </TableHeader>
         <TableBody>{handleTableItems()}</TableBody>
       </Table>
+      <div className="flex justify-center align-bottom">
+        <InputFile onChange={handleFileSelect}></InputFile>
+        <Button onClick={handleUpload}>Upload</Button>
+      </div>
     </div>
   );
 };

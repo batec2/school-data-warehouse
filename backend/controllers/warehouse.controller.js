@@ -1,5 +1,7 @@
 import queryGenerator from "../query/queryGenerator.js";
 import { getDataFromRepository } from "../repositories/warehouse.repository.js";
+import fs from "fs";
+import parseXML from "../utils/parseXML.js";
 
 /**
  *
@@ -8,7 +10,7 @@ import { getDataFromRepository } from "../repositories/warehouse.repository.js";
  */
 export const getData = async (req, res) => {
   try {
-    console.log(req.query);
+    console.log(req.query.data);
     const query = req.query;
     const generatedQuery = queryGenerator(query);
     console.log(generatedQuery);
@@ -18,5 +20,30 @@ export const getData = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: "Failed" });
+  }
+};
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const insertFile = async (req, res) => {
+  try {
+    console.log(req.file);
+    fs.readFile("./uploads/" + req.file.filename, (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      try {
+        parseXML(data);
+      } catch (e) {
+        console.log(e);
+      }
+    });
+    res.status(200).send();
+  } catch (e) {
+    console.log(e);
   }
 };

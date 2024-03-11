@@ -18,3 +18,18 @@ export const fetchWarehouse = async ({ queryKey }) => {
   }
   return response.data;
 };
+
+/**
+ * Sends a post request with file to server
+ * @param {} param0
+ */
+export const uploadFile = async ({ file }) => {
+  // Need to send in FormData object to upload files
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await axios.post(`http://localhost:8888/`, formData);
+  if (response.status !== 200) {
+    throw new Error(`Failed to get data`);
+  }
+};

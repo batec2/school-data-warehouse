@@ -25,6 +25,7 @@ app.use(
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
   })
 );
+
 app.use(morgan("dev")); //console loging
 app.use(express.json()); //body parsing
 app.use(express.urlencoded({ extended: true })); //query string
