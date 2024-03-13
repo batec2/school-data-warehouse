@@ -32,8 +32,12 @@ export const getData = async (req, res) => {
  * @param {*} res
  */
 export const insertFile = async (req, res) => {
-  try {
-    console.log(req.file);
+  console.log(req.file);
+  if (req.file.mimetype !== "text/xml") {
+    res.status(406).send({ message: "Invalid File Type" });
+    return;
+  }
+  if (req)
     fs.readFile("./uploads/" + req.file.filename, (err, data) => {
       if (err) {
         console.log(err);
@@ -44,10 +48,8 @@ export const insertFile = async (req, res) => {
         insertDataRepository(req, result);
       } catch (e) {
         console.log(e);
+        res.status(500).send({ message: "Something went wrong with server" });
       }
     });
-    res.status(200).send();
-  } catch (e) {
-    console.log(e);
-  }
+  res.status(200).send();
 };

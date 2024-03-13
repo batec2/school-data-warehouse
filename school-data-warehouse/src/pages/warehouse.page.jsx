@@ -47,7 +47,13 @@ const WarehousePage = () => {
     enabled: false,
   });
 
-  const { isError: isUploadError, mutateAsync: uploadFileAsync } = useMutation({
+  const {
+    isError: isUploadError,
+    isLoading: isUploadLoading,
+    isSuccess: isUploadSuccess,
+    data: uploadData,
+    mutateAsync: uploadFileAsync,
+  } = useMutation({
     mutationFn: uploadFile,
   });
 
@@ -59,6 +65,7 @@ const WarehousePage = () => {
     setSavedResults({});
     setSearchParams({});
   };
+
   const handleData = () => {
     if (isError) {
       return <h1 className="error">ERROR</h1>;
@@ -113,8 +120,22 @@ const WarehousePage = () => {
     setCurrentFile(e.target.files[0]);
   };
 
+  const handleUploadStatus = () => {
+    if (isUploadError) {
+      return <h1 className="error">Error Uploading</h1>;
+    }
+    if (isUploadLoading) {
+      return <h1 className="pending">Uploading</h1>;
+    }
+    if (isUploadSuccess) {
+      return <h1 className="result"></h1>;
+    }
+  };
+
   const handleUpload = () => {
-    uploadFileAsync({ file: currentFile });
+    if (currentFile) {
+      uploadFileAsync({ file: currentFile });
+    }
   };
 
   return (
@@ -153,6 +174,7 @@ const WarehousePage = () => {
         <InputFile onChange={handleFileSelect}></InputFile>
         <Button onClick={handleUpload}>Upload</Button>
       </div>
+      {handleUploadStatus()}
     </div>
   );
 };

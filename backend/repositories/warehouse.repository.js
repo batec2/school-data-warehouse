@@ -28,64 +28,75 @@ export const getDataFromRepository = async (req, generatedQuery) => {
  * @param {*} data
  */
 export const insertDataRepository = async (req, data) => {
-  const db = req.app.locals.db;
-  for (const table in data) {
-    console.log(table);
-    switch (table) {
-      case "students": {
-        const studentsTable = Students();
-        data.students.forEach(({ student, major, gender }) => {
-          studentsTable.rows.add(student, major, gender);
-        });
-        insertBulk(db, studentsTable);
-        break;
-      }
-      case "courses": {
-        const coursesTable = Courses();
-        data.courses.forEach(({ course, department, faculty, university }) => {
-          coursesTable.rows.add(course, department, faculty, university);
-        });
-        insertBulk(db, coursesTable);
-        break;
-      }
-      case "date": {
-        const dateTable = SemesterYear();
-        data.date.forEach(({ semester_year_id, semester, year }) => {
-          dateTable.rows.add(semester_year_id, semester, year);
-        });
-        insertBulk(db, dateTable);
-        break;
-      }
-      case "instructors": {
-        const instructorTable = Instructors();
-        data.instructors.forEach(
-          ({ instructor, faculty, rank, university }) => {
-            instructorTable.rows.add(instructor, faculty, rank, university);
-          }
-        );
-        insertBulk(db, instructorTable);
-        break;
+  try {
+    const db = req.app.locals.db;
+    for (const table in data) {
+      switch (table) {
+        case "students": {
+          const studentsTable = Students();
+          data.students.forEach(({ student, major, gender }) => {
+            studentsTable.rows.add(student, major, gender);
+          });
+          insertBulk(db, studentsTable);
+          break;
+        }
+        case "courses": {
+          const coursesTable = Courses();
+          data.courses.forEach(
+            ({ course, department, faculty, university }) => {
+              coursesTable.rows.add(course, department, faculty, university);
+            }
+          );
+          insertBulk(db, coursesTable);
+          break;
+        }
+        case "date": {
+          const dateTable = SemesterYear();
+          data.date.forEach(({ semester_year_id, semester, year }) => {
+            dateTable.rows.add(semester_year_id, semester, year);
+          });
+          insertBulk(db, dateTable);
+          break;
+        }
+        case "instructors": {
+          const instructorTable = Instructors();
+          data.instructors.forEach(
+            ({ instructor, faculty, rank, university }) => {
+              instructorTable.rows.add(instructor, faculty, rank, university);
+            }
+          );
+          insertBulk(db, instructorTable);
+          break;
+        }
       }
     }
-  }
-  if (data.warehouse) {
-    const warehouseTable = Warehouse();
-    data.warehouse.forEach(
-      ({ instructor, student, course, semester, year }) => {
-        warehouseTable.rows.add(instructor, student, course, semester, year);
-      }
-    );
-    insertBulk(db, warehouseTable);
+    if (data.warehouse) {
+      const warehouseTable = Warehouse();
+      data.warehouse.forEach(
+        ({ instructor, student, course, semester, year }) => {
+          warehouseTable.rows.add(instructor, student, course, semester, year);
+        }
+      );
+      insertBulk(db, warehouseTable);
+    }
+  } catch (e) {
+    throw e;
   }
 };
 
-const insertBulk = (db, table) => {
+const insertBulk = async (db, table) => {
   const query = db.request();
-  query.bulk(table, (err, result) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log(result);
-  });
+  return query
+    .bulk(table)
+    .then((err, result) => {
+      if (err) {
+        throw new Exception();
+      } else {
+        console.log(result);
+        return 1;
+      }
+    })
+    .catch((e) => {
+      return -1;
+    });
 };

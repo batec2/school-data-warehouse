@@ -1,4 +1,4 @@
-USE [school-data-warehouse]
+USE [school-data-warehouse-2]
 GO
 
 /****** Object:  Table [dbo].[courses]    Script Date: 2024-02-28 12:41:52 PM ******/
@@ -7,6 +7,8 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 CREATE TABLE [dbo].[courses](
 	[course] [int] NOT NULL,
