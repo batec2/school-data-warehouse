@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[instructors](
-	[instructor] [int] NOT NULL IDENTITY(1,1),
+	[instructor] [int] NOT NULL,
 	[faculty] [varchar](50) NULL,
 	[rank] [varchar](50) NULL,
 	[university] [varchar](50) NULL,

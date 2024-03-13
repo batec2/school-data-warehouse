@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[date](
-	[semester_year_id] [int] NOT NULL IDENTITY(1,1),
+	[semester_year_id] [int],
 	[semester] [nvarchar](50) NOT NULL,
 	[year] [nvarchar](50) NOT NULL,
  CONSTRAINT [PK_date] PRIMARY KEY CLUSTERED 

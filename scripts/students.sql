@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[students](
-	[student] [int] NOT NULL IDENTITY(1,1),
+	[student] [int] NOT NULL,
 	[major] [nvarchar](50) NOT NULL,
 	[gender] [nvarchar](50) NOT NULL,
  CONSTRAINT [PK_students] PRIMARY KEY CLUSTERED 
